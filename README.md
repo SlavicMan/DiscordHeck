@@ -20,8 +20,7 @@ Install the MelonLoader Installer found at [MelonLoader Github](https://github.c
 After MelonLoader has finished installing, it will open a popup that 
 
 ![Installer Screenshot](https://github.com/SlavicMan/DiscordHeck/blob/default/installer.png?raw=true)
-Click 'OK', this will close the installer. Then you will want to goto the SpiderHeck install location you will see a "Mods" folder, drag the DiscordHeck.dll and other required files into the Mods folder.
-
+Click 'OK', this will close the installer. Then you will want to goto the SpiderHeck install location you will see a "Mods" folder, drag the DiscordHeck.dll and other required files into the Mods folder. Drag the discord-rpc.dll into the main folder where the .exe executable is (SPIDERHECK_version.exe)
 When launching the game and command prompt window should open
 
 ![Command Prompt](https://github.com/SlavicMan/DiscordHeck/blob/default/installer1.png?raw=true)
