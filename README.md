@@ -15,8 +15,7 @@ A Discord Rich Presence mod for SpiderHeck (should be compatible with all newer 
   
 ## Installation
 
-Install the MelonLoader Installer found at
-https://github.com/LavaGang/MelonLoader/releases/
+Install the MelonLoader Installer found at [MelonLoader Github](https://github.com/LavaGang/MelonLoader/releases/)
 
 After MelonLoader has finished installing, it will open a popup that 
 
