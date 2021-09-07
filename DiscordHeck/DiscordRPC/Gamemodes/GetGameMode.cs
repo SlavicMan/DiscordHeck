@@ -4,95 +4,85 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
+using MelonLoader;
+using UnityEngine;
 
 namespace DiscordHeck.Gamemodes
 {
-    class GetGameMode
+    class GetGameMode : MelonMod
     {
-        private Scene _curScene;
-        public Scene curScene
+        public static GetGameMode instance;
+        public override void OnApplicationStart()
         {
-            get
-            {
-                return SceneManager.GetActiveScene();
-            }
-            set
-            {
-                _curScene = value;
-            }
+            GetGameMode.instance = this;
+        }
+        private Scene _curScene;
+        public Scene curScene()
+        {
+            this._curScene = SceneManager.GetActiveScene();
+            return this._curScene;
         }
         private Modes _curMode;
-        public Modes curMode
+        public Modes curMode()
         {
-            get
+
+            if (WaveMode.instance.GameModeActive())
             {
-                if (WaveMode.instance.GameModeActive())
-                    return Modes.WASPS;
-                else if (VersusMatchController.matchInProgress)
-                    return Modes.VERSUS;
-                else if (SceneManager.GetActiveScene().name == "Menu")
-                    return Modes.MAINMENU;
-                else if (SceneManager.GetActiveScene().name == "Lobby")
-                    return Modes.LOBBY;
+                this._curMode = Modes.WASPS;
+                return this._curMode;
+            }
+
+            else if (VersusMatchController.matchInProgress)
+            {
+                this._curMode = Modes.VERSUS;
+                return this._curMode;
+            }
+            else if (SceneManager.GetActiveScene().name == "MainMenu")
+            {
+                this._curMode = Modes.MAINMENU;
+                return this._curMode;
+            }
+            else if (SceneManager.GetActiveScene().name == "Lobby")
+            {
+                this._curMode = Modes.LOBBY;
+                return this._curMode;
+            } else
+            {
+                this._curMode = Modes.PODIUM;
                 return Modes.PODIUM;
             }
-            set { _curMode = value; }
         }
         private int _curLives;
-        public int curLives
+        public int curLives()
         {
-            get
-            {
-                return WaveMode.instance.lives;
-            }
-            set { _curLives = value; }
+            this._curLives = WaveMode.instance.lives;
+            return this._curLives;
         }
-        private int _curWaves;
-        public String curWaves
+        private string _curWaves;
+        public string curWaves()
         {
-            get
-            {
-                var t = UnityEngine.GameObject.FindObjectOfType<WaveModeHud>();
-                return t.waveCounter.text.ToString();
-            }
-            set { _curWaves = int.Parse(value); }
+            this._curWaves = UnityEngine.GameObject.FindObjectOfType<WaveModeHud>().waveCounter.text;
+            return this._curWaves;
         }
         private int _curScore;
-        public int curScore
+        public int curScore()
         {
-            get
-            {
-                var tPC = UnityEngine.GameObject.FindObjectOfType<PlayerController>();
-                return ScoreKeeper.GetScore(tPC.playerName);
-            }
-            set { _curScore = value; }
+            var tPC = UnityEngine.GameObject.FindObjectOfType<PlayerController>();
+            this._curScore = ScoreKeeper.GetScore(tPC.playerName);
+            return this._curScore;
+            
         }
         private PlayerScore _curLeader;
-        public PlayerScore curLeader
+        public PlayerScore curLeader()
         {
-            get
-            {
-                return ScoreKeeper.GetLeader();
-            }
-            set { _curLeader = value; }
+            this._curLeader = ScoreKeeper.GetLeader();
+            return this._curLeader;
         }
         private int _leadScore;
-        public int leadScore
+        public int leadScore()
         {
-            get
-            {
-                return ScoreKeeper.GetScore(ScoreKeeper.GetLeader().ToString());
-            }
-            set { _leadScore = value; }
-        }
-           
-        public enum Modes
-        {
-            MAINMENU,
-            LOBBY,
-            WASPS,
-            VERSUS,
-            PODIUM
+            this._leadScore = ScoreKeeper.GetScore(ScoreKeeper.GetLeader().ToString());
+            return this._leadScore;
         }
         public bool CheckIfInWasps()
         {
@@ -107,6 +97,15 @@ namespace DiscordHeck.Gamemodes
                 return true;
             else
                 return false;
+        }
+           
+        public enum Modes
+        {
+            MAINMENU,
+            LOBBY,
+            WASPS,
+            VERSUS,
+            PODIUM
         }
         
         public void CheckMode()

@@ -3,4 +3,9 @@
   <PropertyGroup>
     <ProjectView>ProjectFiles</ProjectView>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <StartAction>Program</StartAction>
+    <StartProgram>E:\Gamejolt\spiderheck-474440\SpiderHeck - The Very Very Alpha Test Demo-529759\data\SPIDERHECK_0.65.1.exe</StartProgram>
+    <StartWorkingDirectory>E:\Gamejolt\spiderheck-474440\SpiderHeck - The Very Very Alpha Test Demo-529759\data\Mods\</StartWorkingDirectory>
+  </PropertyGroup>
 </Project>
